@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Hold Shift to Check Multiple Checkboxes</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
   <style>
@@ -96,6 +97,55 @@
   </div>
 
 <script>
+  var checkboxList = $("input[type='checkbox']");
+  var firstClick = true;
+  var start = false;
+  var stop = false;
+
+  for (var i = 0; i < checkboxList.length; ++i) {
+    checkboxList [i].addEventListener ('click', function (event) {
+      if(event.target.checked) {
+        if (firstClick) { event.target.classList.add("one"); firstClick = false; }
+              else { 
+                if (event.shiftKey) {
+                  event.target.classList.add("two") 
+                  firstClick = true;
+                  if ($("input[class='one']").parent().prevUntil ("div>input[class='two']").length > 1) {
+                  check (-1);
+                  } else {
+                    check (1);
+                  }
+                  $("input[class='one']").removeClass('one');
+                  $("input[class='two']").removeClass('two');
+                }
+              }
+          }
+        })
+    };
+
+function check (direction = 1) {
+  var i = (direction == 1) ? 0 : checkboxList.length-1;
+  var limit = (direction == 1) ? checkboxList.length : 0;
+  while (i!= limit) {
+    if (stop) {
+      start = false;
+      stop = false;
+      return;
+    } else if (start) {
+      if (checkboxList[i].classList.contains("two")) {
+        stop = true;
+      }
+      checkboxList[i].checked = true;
+    } else {
+      if (checkboxList[i].classList.contains("one")) {
+        start = true;
+        checkboxList[i].checked = true;
+      }
+      
+    }
+    i +=direction;
+  }
+}
 </script>
 </body>
 </html>

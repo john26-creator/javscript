@@ -17,7 +17,7 @@
       min-height: 100vh;
     }
 
-    #bands {
+    #titles {
       list-style: inside square;
       font-size: 20px;
       background: white;
@@ -27,12 +27,12 @@
       box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
     }
     
-    #bands li {
+    #titles li {
       border-bottom: 1px solid #efefef;
       padding: 20px;
     }
     
-    #bands li:last-child {
+    #titles li:last-child {
       border-bottom: 0;
     }
 
@@ -43,13 +43,46 @@
 
   </style>
 
-  <ul id="bands"></ul>
+</body>
 
 <script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+const titles = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+const wordToRemove = ['The ', 'A ', 'An ']; // Les mots à supprimer pour pouvoir trier titles
+var titlesSortable = new Array();            // Le tableau des mots ecourtés pouvant être triés
+var dictionary = {};                        // Le dictionnaire [key = textes ecourtés ex "Plot in You"; Value = textes complets ex : The Plot in You"]
 
 
+var added = false; // si un des mot taboos a été supprimés
+
+for(var i = 0; i< titles.length; i++) { //je parcours mes titres
+  
+  for(var j=0; j<wordToRemove.length;j++) { // Je parcours mes mots taboos
+    let index = titles[i].indexOf(wordToRemove[j]); // je recupere l'indice de départ du mot taboo dans le titre courant
+    if (index==0) {                                 //Si le mot taboo est en début de chaine
+      dictionary [titles[i].substring(wordToRemove[j].length)] = titles[i]; //On l'ajoute dans le dictionnaire
+      titlesSortable.push(titles[i].substring(wordToRemove[j].length));     //On l'ajoute dans le tableau triable
+      added = true;                                                         //Un mot taboo a été supprimé
+    }
+  }
+  if (!added) {
+      dictionary [titles[i]] = titles[i];
+      titlesSortable.push(titles[i]);
+    }
+    added = false;
+}
+
+
+titlesSortable.sort();
+  var ul = document.createElement("ul");
+  ul.id = "titles";
+  for(var i = 0; i<titlesSortable.length; i++) {
+    let li = document.createElement("li");
+    li.innerHTML = "<a href='#'>" + dictionary[titlesSortable[i]] + "</a>";
+    ul.appendChild(li);
+  }
+  var body = document.querySelector("body");
+  body.appendChild(ul);
 </script>
 
-</body>
+
 </html>

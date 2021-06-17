@@ -1,51 +1,60 @@
-html {
-  font-size: 10px;
-  background: url(https://i.imgur.com/b9r5sEL.jpg) bottom center;
-  background-size: cover;
+body{
+    background-image: url(opera-sydney.jpg);
+    text-align: center;
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    background-position:25% 25%;
+
+}
+#bloc-principal{
+    /* border: solid 2px rgb(255, 255, 255); */
+    
+    display: inline-block;
+    margin: 0 auto;
+    width: 85%;
+    height: 100px;
+    
+    position: absolute; /* postulat de départ */
+    top: 25%; left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+    
+    justify-content: space-evenly;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-body,html {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.bloc-letter{
+    width: 80px;
+    height: 100px;
+    border: solid 1px rgb(57, 58, 57);
+    background: linear-gradient(rgba(58, 58, 58, 0.2), rgba(141, 88, 68, 0.2), rgba(177, 156, 148, 0.2)  );
+    flex-direction:column;
+    justify-content: center;
+    /* text-align: center; */
+    display: flex;
+    flex-wrap: wrap;
+    color: goldenrod;
+    font-family: Comic Sans MS, Comic Sans, cursive;
 }
 
-.keys {
-  display: flex;
-  flex: 1;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
+.bloc-letter:hover{
+    border: solid 4px goldenrod;
+    box-shadow: 10px 5px 5px rgba(243, 115, 35, 0.774);
+    /* box-shadow:  ;; */
 }
 
-.key {
-  border: .4rem solid black;
-  border-radius: .5rem;
-  margin: 1rem;
-  font-size: 1.5rem;
-  padding: 1rem .5rem;
-  transition: all .07s ease;
-  width: 10rem;
-  text-align: center;
-  color: white;
-  background: rgba(0,0,0,0.4);
-  text-shadow: 0 0 .5rem black;
-}
 
-.playing {
-  transform: scale(1.1);
-  border-color: #ffc600;
-  box-shadow: 0 0 1rem #ffc600;
+kbd{
+    color: white;
+    font-size: 2rem;
 }
+/* .sound {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    color: #ffc600;
+  } */
 
-kbd {
-  display: block;
-  font-size: 4rem;
-}
-
-.sound {
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: .1rem;
-  color: #ffc600;
-}
+  .key{
+      transition: 0.7s;
+  }
