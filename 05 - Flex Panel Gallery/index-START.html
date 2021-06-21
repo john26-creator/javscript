@@ -54,29 +54,19 @@
       background-position: center;
     }
 
-
-    @keyframes slideUp {
-      from {
-
-      }
-      to {
-
-      }
-    }
-
     @keyframes expand {
       from {
         flex: 1;
       }
 
       to {
-        flex:2;
+        flex:3;
       }
     }
 
     @keyframes unexpand {
       from {
-        flex: 2;
+        flex: 3;
       }
 
       to {
@@ -95,6 +85,36 @@
         animation-duration: 2s;
         animation-fill-mode: forwards;
     }
+
+    .panels > .active > p:nth-child(2) {
+      font-size: 2em;
+    }
+
+    .panels > .active > p:nth-child(2) {
+      font-size: 8em;
+    }
+
+    .panels > .inactive > p:first-child {
+      transform: translateY(-800%);
+      font-size: 4em;
+      
+    }
+
+    .panels > .inactive > p:last-child {
+      transform: translateY(800%);
+      font-size: 4em;
+    }
+
+    .panels > .active > p:first-child {
+      transform: translateY(0);
+      font-size: 4em;
+    }
+
+    .panels > .active > p:last-child {
+    transform: translateY(0);
+    font-size: 4em;
+}
+    
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
     .panel2 { background-image:url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500); }
@@ -164,18 +184,7 @@
         function () {
           var panel  =  ($(this).hasClass("panel")) ? $(this) : $(this).parentsUntil( ".panel" );
           panel.toggleClass('active');
-          panel.toggleClass('inactive');
-          
-          var firstChild = panel.find(">:first-child");
-          var lastChild = panel.find(">:last-child")
-          if ( panel.hasClass('active') ) {    
-            firstChild.slideDown ("slow");
-            lastChild.slideUp("slow");
-          } else {
-            firstChild.slideUp ("slow");
-            lastChild.slideDown("slow");
-          }
-
+          panel.toggleClass('inactive');   
         })
       }
     );
